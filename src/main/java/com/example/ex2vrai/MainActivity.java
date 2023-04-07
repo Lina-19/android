@@ -7,16 +7,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+   // private static final String TAGNAME = MainActivity.class.getCanonicalName(); //pour la ligne 23
 
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
         Log.d(LOG_TAG, "-------");
         Log.d(LOG_TAG, "onCreate");
+       // Log.d(MainActivity.class.getCanonicalName(),"OnCreate");
+     //  Log.d(TAGNAME,"onCreate");
     }
 
     @SuppressLint("RestrictedApi")
