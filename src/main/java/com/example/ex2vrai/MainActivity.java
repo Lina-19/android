@@ -10,9 +10,19 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 
-   // private static final String TAGNAME = MainActivity.class.getCanonicalName(); //pour la ligne 23
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class MainActivity extends AppCompatActivity {
+    private static final String HTTP_URL = "https://belatar.name/rest/profile.php?login=test&passwd=test&id=9998";
+    private Etudiant etd;
+
+    // private static final String TAGNAME = MainActivity.class.getCanonicalName(); //pour la ligne 23
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -42,6 +52,42 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.d(LOG_TAG, "-------");
         Log.d(LOG_TAG, "onResume");
+
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, HTTP_URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                Log.d(MainActivity.class.getSimpleName(),response.toString());
+                try {
+                    etd =new Etudiant(response.getInt("id"),response.getString("nom"),
+                            response.getString("prenom"),response.getString("classe"),
+                            response.getString("phone"),null
+                            );
+
+                    EditText txtnom=findViewById(R.id.labelNom);
+                    EditText txtprenom=findViewById(R.id.labelPrenom);
+                    EditText  txtclasse=findViewById(R.id.labelClasse);
+
+                    txtnom.setText(etd.getNom());
+                    txtprenom.setText(etd.getPrenom());
+                    txtclasse.setText(etd.getClasse());
+
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.e(MainActivity.class.getSimpleName(),error.getMessage());
+
+            }
+        }
+        );
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+
     }
 
     @SuppressLint("RestrictedApi")
