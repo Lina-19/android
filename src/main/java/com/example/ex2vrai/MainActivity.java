@@ -5,12 +5,13 @@ import static androidx.core.content.PackageManagerCompat.LOG_TAG;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String HTTP_URL = "https://belatar.name/rest/profile.php?login=test&passwd=test&id=9998";
     private static final String HTTP_IMAGES = "https://belatar.name/images/";
     private Etudiant etd;
-
+ImageView imageView;
     // private static final String TAGNAME = MainActivity.class.getCanonicalName(); //pour la ligne 23
 
     @SuppressLint("RestrictedApi")
@@ -68,16 +69,18 @@ public class MainActivity extends AppCompatActivity {
                             response.getString("prenom"),response.getString("classe"),
                             response.getString("phone"),null
                             );
-                    VolleySingleton.getInstance(getApplicationContext()).getImageLoader().
-                            get(HTTP_IMAGES + response.getString("photo"), new ImageLoader.ImageListener() {
+                    VolleySingleton.getInstance(getApplicationContext()).getImageLoader()
+                            .get(HTTP_IMAGES + response.getString("photo"), new ImageLoader.ImageListener() {
                                 @Override
                                 public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-
+                                    etd.setImage(response.getBitmap());
+                                            ImageView img = findViewById(R.id.image);
+                                            img.setImageBitmap(etd.getImage());
                                 }
 
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-
+                                    Log.e(MainActivity.class.getSimpleName(),error.getMessage());
                                 }
                             });
                     EditText txtnom=findViewById(R.id.labelNom);
