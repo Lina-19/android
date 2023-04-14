@@ -14,5 +14,6 @@
 
     <item name="txtRemarque" type="id" />
     <item name="labelRemarque" type="id" />
+    <item name="labelimg" type="id" />
 
 </resources>

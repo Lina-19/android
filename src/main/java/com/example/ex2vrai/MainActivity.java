@@ -7,12 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
@@ -20,6 +23,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     private static final String HTTP_URL = "https://belatar.name/rest/profile.php?login=test&passwd=test&id=9998";
+    private static final String HTTP_IMAGES = "https://belatar.name/images/";
     private Etudiant etd;
 
     // private static final String TAGNAME = MainActivity.class.getCanonicalName(); //pour la ligne 23
@@ -60,10 +64,22 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(MainActivity.class.getSimpleName(),response.toString());
                 try {
                     etd =new Etudiant(response.getInt("id"),response.getString("nom"),
+
                             response.getString("prenom"),response.getString("classe"),
                             response.getString("phone"),null
                             );
+                    VolleySingleton.getInstance(getApplicationContext()).getImageLoader().
+                            get(HTTP_IMAGES + response.getString("photo"), new ImageLoader.ImageListener() {
+                                @Override
+                                public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
 
+                                }
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+
+                                }
+                            });
                     EditText txtnom=findViewById(R.id.labelNom);
                     EditText txtprenom=findViewById(R.id.labelPrenom);
                     EditText  txtclasse=findViewById(R.id.labelClasse);
