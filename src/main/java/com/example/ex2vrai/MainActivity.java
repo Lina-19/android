@@ -25,6 +25,7 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
     private static final String HTTP_URL = "https://belatar.name/rest/profile.php?login=test&passwd=test&id=9998";
     private static final String HTTP_IMAGES = "https://belatar.name/images/";
+    private static final String HTTP_Notes="https://belatar.name/rest/profile.php?login=test&passwd=test&id=9998&&notes=true";
     private Etudiant etd;
 ImageView imageView;
     // private static final String TAGNAME = MainActivity.class.getCanonicalName(); //pour la ligne 23

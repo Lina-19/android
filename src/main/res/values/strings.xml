@@ -4,6 +4,7 @@
     <string name="nom">Nom : </string>
     <string name="prenom">Prenom :</string>
     <string name="classe">Classe :</string>
+    <string name="note">Notes :</string>
     <string name="remarque">Remarque :</string>
 
 </resources>

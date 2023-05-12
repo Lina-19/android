@@ -11,10 +11,13 @@
 
     <item name="txtClasse" type="id" />
     <item name="labelClasse" type="id" />
-
+    <item name="txtNotes" type="id" />
     <item name="txtRemarque" type="id" />
     <item name="labelRemarque" type="id" />
     <item name="image" type="id" />
+    <item name="icone" type="id" />
 
-
+    <item name="listView" type="id" />
+    <item name="matiere" type="id" />
+    <item name="score" type="id" />
 </resources>
