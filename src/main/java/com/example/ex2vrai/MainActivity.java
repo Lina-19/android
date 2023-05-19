@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -19,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String HTTP_Notes="https://belatar.name/rest/profile.php?login=test&passwd=test&id=9998&&notes=true";
     private Etudiant etd;
 ImageView imageView;
+private ListView ListeNote=null;
     // private static final String TAGNAME = MainActivity.class.getCanonicalName(); //pour la ligne 23
 
     @SuppressLint("RestrictedApi")
@@ -59,6 +62,13 @@ ImageView imageView;
         Log.d(LOG_TAG, "-------");
         Log.d(LOG_TAG, "onResume");
 
+        ListeNote=findViewById(R.id.listView);
+        String noteparametre;
+        if(ListeNote==null){
+            noteparametre="";
+        }
+        else noteparametre="&notes=true";
+
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, HTTP_URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -70,6 +80,12 @@ ImageView imageView;
                             response.getString("prenom"),response.getString("classe"),
                             response.getString("phone"),null
                             );
+                    if(response.has("note")){
+                        JSONArray ja=response.getJSONArray("notes");
+                        for(int i=0;i<ja.length();i++){
+                            etd.addnote(new Note(ja.getJSONObject(i).getString("label"),ja.getJSONObject(i).getDouble("score")));
+                        }
+                    }
                     VolleySingleton.getInstance(getApplicationContext()).getImageLoader()
                             .get(HTTP_IMAGES + response.getString("photo"), new ImageLoader.ImageListener() {
                                 @Override

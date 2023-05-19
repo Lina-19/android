@@ -80,14 +80,7 @@
             app:layout_constraintTop_toBottomOf="@id/txtPrenom"
             tools:ignore="UnknownId"></EditText>
 
-        <TextView
-            android:id="@id/txtNotes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/note"
-            android:textSize="30sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtClasse"></TextView>
+
 
         <ListView
             android:id="@id/listView"
@@ -99,31 +92,13 @@
             app:layout_constraintEnd_toStartOf="@id/image"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtNotes" />
+            app:layout_constraintTop_toBottomOf="@id/txtClasse" />
 
-        <ImageView
-            android:id="@+id/icone"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintStart_toStartOf="parent" />
 
-        <EditText
-            android:id="@id/matiere"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/icone"
-            tools:ignore="MissingConstraints"></EditText>
 
-        <EditText
-            android:id="@id/score"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@id/image"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/matiere"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="238dp"></EditText>
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

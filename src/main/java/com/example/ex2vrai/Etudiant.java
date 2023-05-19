@@ -2,11 +2,35 @@ package com.example.ex2vrai;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 public class Etudiant {
     private  int id;
     private String nom,prenom,classe,phone;
     private Bitmap image;
+    private List<Note> notes;
 
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
+    public void addnote(Note n ){
+        if(this.notes==null)
+           this.notes=new ArrayList<Note>() ;
+        this.notes.add(n);
+
+    }
     public Bitmap getImage() {
         return image;
     }

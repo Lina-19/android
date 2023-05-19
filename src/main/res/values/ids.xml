@@ -20,4 +20,7 @@
     <item name="listView" type="id" />
     <item name="matiere" type="id" />
     <item name="score" type="id" />
+    <item name="iconLike" type="id" />
+    <item name="txtScore" type="id" />
+    <item name="txtMatiere" type="id" />
 </resources>
