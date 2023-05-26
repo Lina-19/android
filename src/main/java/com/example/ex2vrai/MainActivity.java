@@ -69,7 +69,7 @@ private ListView ListeNote=null;
         }
         else noteparametre="&notes=true";
 
-        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, HTTP_URL, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, HTTP_URL+noteparametre, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -80,7 +80,7 @@ private ListView ListeNote=null;
                             response.getString("prenom"),response.getString("classe"),
                             response.getString("phone"),null
                             );
-                    if(response.has("note")){
+                    if(response.has("notes")){
                         JSONArray ja=response.getJSONArray("notes");
                         for(int i=0;i<ja.length();i++){
                             etd.addnote(new Note(ja.getJSONObject(i).getString("label"),ja.getJSONObject(i).getDouble("score")));
@@ -100,6 +100,10 @@ private ListView ListeNote=null;
                                     Log.e(MainActivity.class.getSimpleName(),error.getMessage());
                                 }
                             });
+                    if(etd.getNotes()!=null){
+                        NoteAdapter na=new NoteAdapter(MainActivity.this,etd.getNotes());
+                        ListeNote.setAdapter(na);
+                    }
                     EditText txtnom=findViewById(R.id.labelNom);
                     EditText txtprenom=findViewById(R.id.labelPrenom);
                     EditText  txtclasse=findViewById(R.id.labelClasse);
